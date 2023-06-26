@@ -30,6 +30,8 @@ RUN apt-get update \
   libtiff6 \
   libwebp7 \
   libpq5 \
+  jq \
+  wget \
   shared-mime-info \
   mime-support \
   && apt-get clean \
@@ -37,6 +39,11 @@ RUN apt-get update \
 
 RUN mkdir -p /app/media /app/static \
   && chown -R saleor:saleor /app/
+
+WORKDIR /
+COPY entrypoint.sh .
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 COPY --from=build-python /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
 COPY --from=build-python /usr/local/bin/ /usr/local/bin/
