@@ -43,7 +43,7 @@ apps:
           database_name: "saleor"
       - module: nullstone/aws-redis-access
         connections:
-          redis: redis-xyz
+          redis: redis
   worker:
     module: nullstone/aws-fargate-service
     vars:
@@ -59,6 +59,6 @@ apps:
     capabilities:
       - module: nullstone/aws-postgres-access
         connections:
-          postgres: db-123
+          postgres: db
         vars:
           database_name: "saleor"
